@@ -1,5 +1,5 @@
 ---
-title: 一种比较通用的hash方法
+title: 通用hash方法
 categories:
 - C++知识
 tags:
