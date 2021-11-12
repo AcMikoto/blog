@@ -853,22 +853,22 @@ tag:
 #---------------------------
 
 about:
- enable: true
- banner_img: /img/background/about_background.jpg
- banner_img_height: 60
- banner_mask_alpha: 0.3
- subtitle: 关于
- avatar: /img/background/mikoto.jpg
- name: "AC_Mikoto"
- intro: "一枚机械设计工程师"
- # 更多图标可从 https://hexo.fluid-dev.com/docs/icon/ 查找，`class` 代表图标的 css class，添加 `qrcode` 后，图标不再是链接而是悬浮二维码
- # More icons can be found from https://hexo.fluid-dev.com/docs/en/icon/  `class` is the css class of the icon. If adding `qrcode`, The icon is no longer a link, but a hovering QR code
- icons:
-   - { class: "iconfont icon-github-fill", link: "https://github.com/MoonlightSn", tip: "GitHub" }
-   - { class: "iconfont icon-leetcode", link: "https://leetcode-cn.com/u/ac_mikoto/", tip: "LeetCode" }
-   - { class: "iconfont icon-codeforces", link: "https://codeforces.com/profile/AC_Mikoto", tip: "Codeforces" }
-   - { class: "iconfont icon-qq-fill", qrcode: "/img/Others/my_qq.jpg" }
-   - { class: "iconfont icon-wechat-fill", qrcode: "/img/Others/my_vx.jpg"}
+  enable: true
+  banner_img: /img/background/about_background.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.3
+  subtitle: 关于
+  avatar: /img/background/mikoto.jpg
+  name: "AC_Mikoto"
+  intro: "一枚机械设计工程师"
+  # 更多图标可从 https://hexo.fluid-dev.com/docs/icon/ 查找，`class` 代表图标的 css class，添加 `qrcode` 后，图标不再是链接而是悬浮二维码
+  # More icons can be found from https://hexo.fluid-dev.com/docs/en/icon/  `class` is the css class of the icon. If adding `qrcode`, The icon is no longer a link, but a hovering QR code
+  icons:
+    - { class: "iconfont icon-github-fill", link: "https://github.com/MoonlightSn", tip: "GitHub" }
+    - { class: "iconfont icon-leetcode", link: "https://leetcode-cn.com/u/ac_mikoto/", tip: "LeetCode" }
+    - { class: "iconfont icon-codeforces", link: "https://codeforces.com/profile/AC_Mikoto", tip: "Codeforces" }
+    - { class: "iconfont icon-qq-fill", qrcode: "/img/Others/my_qq.jpg" }
+    - { class: "iconfont icon-wechat-fill", qrcode: "/img/Others/my_vx.jpg"}
 
 
 #---------------------------
@@ -901,30 +901,18 @@ page404:
 #---------------------------
 links:
   enable: true
-  banner_img: /img/default.png
-  banner_img_height: 60
+  banner_img: /img/background/friend_links.png
+  banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle:
   # 友链的成员项
   # Member item of page
   items:
     - {
-      title: "Fluid Blog",
-      intro: "主题博客",
-      link: "https://hexo.fluid-dev.com/",
-      avatar: "/img/favicon.png"
-    }
-    - {
-      title: "Fluid Docs",
-      intro: "主题使用指南",
-      link: "https://hexo.fluid-dev.com/docs/",
-      avatar: "/img/favicon.png"
-    }
-    - {
-      title: "Fluid Repo",
-      intro: "主题 GitHub 仓库",
-      link: "https://github.com/fluid-dev/hexo-theme-fluid",
-      avatar: "/img/favicon.png"
+      title: "Jsss",
+      intro: "BIT-CS硕士在读",
+      link: "https://csjsss.github.io/",
+      avatar: "/img/Links/jsss.jpg"
     }
 
   # 当成员头像加载失败时，替换为指定图片
