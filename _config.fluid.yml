@@ -646,7 +646,7 @@ post:
     # 指定的插件，需要同时设置对应插件的必要参数
     # The specified plugin needs to set the necessary parameters at the same time
     # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis
-    type: valine
+    type: waline
 
 
 #---------------------------
@@ -720,16 +720,16 @@ valine:
   highlight: false
   recordIP: false
   serverURLs: ''
-  emojiCDN:
-  emojiMaps:
-  enableQQ: false
+  emojiCDN: 
+  emojiMaps: 
+  enableQQ: true
 
 # Waline
 # 从 Valine 衍生而来，额外增加了服务端和多种功能
 # Derived from Valine, with self-hosted service and new features
 # See: https://waline.js.org/
 waline:
-  serverURL: ''
+  serverURL: 'https://blog-comments-api-ltx2lo8nx-acmikoto.vercel.app/'
   path: window.location.pathname
   placeholder:
   meta: ['nick', 'mail', 'link']
@@ -737,7 +737,7 @@ waline:
   lang: 'zh-CN'
   emoji: ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
   dark: 'html[data-user-color-scheme="dark"]'
-  avatar: 'retro'
+  avatar: 'monsterid'
   avatarCDN: 'https://seccdn.libravatar.org/avatar/'
   avatarForce: false
   wordLimit: 0
@@ -932,7 +932,7 @@ links:
     # 指定的插件，需要同时设置对应插件的必要参数
     # The specified plugin needs to set the necessary parameters at the same time
     # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis
-    type: valine
+    type: waline
 
 
 #---------------------------
