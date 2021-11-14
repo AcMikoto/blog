@@ -7,8 +7,9 @@ tags:
 - 二分套二分
 - 模拟
 ---
-排名：三题，518/2676  
-比赛实况概括：日常模拟题写炸了，wa十发，心态爆炸，神志不清。
+solved：3/4  
+rank：518/2676   
+实况概括：日常模拟题写炸了，wa十发，心态爆炸，神志不清。
 
 T1：[5910. 检查两个字符串是否几乎相等](https://leetcode-cn.com/contest/biweekly-contest-65/problems/check-whether-two-strings-are-almost-equivalent/)  
 如果两个字符串 word1 和 word2 中从 'a' 到 'z' 每一个字母出现频率之差都 不超过 3 ，那么我们称这两个字符串 word1 和 word2 几乎相等。  
@@ -43,13 +44,14 @@ T2：[5911. 模拟行走机器人 II](https://leetcode-cn.com/problems/walking-r
 
 请你实现 Robot 类：
 
-```Robot(int width, int height)``` 初始化一个 width x height 的网格图，机器人初始在 (0, 0)，方向朝 "East"。  
-```void move(int num)``` 给机器人下达前进 num 步的指令。  
-```vector<int> getPos()``` 返回机器人当前所处的格子位置，用一个长度为 2 的数组 [x, y] 表示。  
-```string getDir()``` 返回当前机器人的朝向，为 "North" ，"East" ，"South" 或者 "West"。  
+
+Robot(int width, int height) 初始化一个 width x height 的网格图，机器人初始在 (0, 0)，方向朝 "East"。  
+void move(int num) 给机器人下达前进 num 步的指令。  
+vector\<int> getPos() 返回机器人当前所处的格子位置，用一个长度为 2 的数组 [x, y] 表示。  
+string getDir() 返回当前机器人的朝向，为 "North" ，"East" ，"South" 或者 "West"。  
 - 2 <= width, height <= 100  
-- 1 <= num <= 105  
-- move ，getPos 和 getDir 总共调用次数不超过 104 次。  
+- 1 <= num <= $10^5$  
+- move ，getPos 和 getDir 总共调用次数不超过 $10^4$ 次。  
 
 分析：按题意模拟即可，注意数据范围比较大，暴力会超时，必须取模，且不能单步模拟。  
 比赛时存在的问题：
