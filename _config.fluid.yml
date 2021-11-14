@@ -915,6 +915,13 @@ links:
       avatar: "/img/Links/jsss.jpg"
     }
 
+    - {
+      title: "金毛败犬の秘密空间",
+      intro: "梦想是成为golang后端工程师！",
+      link: "https://www.eririspace.cn/",
+      avatar: "https://www.eririspace.cn/medias/err2.jpg"
+    }
+
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
   onerror_avatar: /img/avatar.png
