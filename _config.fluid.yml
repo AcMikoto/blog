@@ -914,6 +914,12 @@ links:
       link: "https://csjsss.github.io/",
       avatar: "/img/Links/jsss.jpg"
     }
+    - {
+      title: "金毛败犬の秘密空间",
+      intro: "梦想是成为golang后端工程师！",
+      link: "https://www.eririspace.cn/",
+      avatar: "https://www.eririspace.cn/medias/err2.jpg"
+    }
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
@@ -923,7 +929,7 @@ links:
   # Custom content at the bottom of the links
   custom:
     enable: true
-    content: '<hr><p>在下方留言申请加入我的友链，按如下格式提供信息：</p><ul><li>博客名：Fluid</li><li>简介：Fluid 主题官方博客</li><li>链接：https://hexo.fluid-dev.com</li><li>图片：https://hexo.fluid-dev.com/img/favicon.png</li></ul>'
+    content: '<hr><p>在下方留言申请加入我的友链，按如下格式提供信息：</p><ul><li>博客名：AC_Mikoto</li><li>简介：一枚机械设计工程师</li><li>链接：https://ac-mikoto.top</li><li>图片：https://ac-mikoto.top/img/background/mikoto.jpg</li></ul>'
 
   # 评论插件
   # Comment plugin
