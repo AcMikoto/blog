@@ -80,7 +80,7 @@ updated:
      - templates：存储网页模板
 7. git一下代码
     - git status # 查看修改状态，红色是修改的
-    - git add . # 把所有修改加入带上传队列
+    - git add . # 把所有修改加入待上传队列
     - git status # 再次查看修改状态，已加入为绿色，部分未加入的可手动加一遍
     - git commit -m "xxx" # 添加修改信息
     - git push # 把修改传到git仓库

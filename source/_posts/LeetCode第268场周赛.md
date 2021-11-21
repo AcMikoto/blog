@@ -77,7 +77,7 @@ public:
 ## T3: [区间内查询数字的频率](https://leetcode-cn.com/problems/range-frequency-queries/)  
 
 ### 思路
-哈希表记录某个值出现的下标位置，二分即可
+哈希表记录某个值出现的下标位置，二分即可（另外主席树、树状数组均可解此题，主席树解法属于模板题难度，树状数组解法属于第一次见，在此记录一下）  
 ### Code
 ```
 class RangeFreqQuery {
@@ -93,6 +93,47 @@ public:
     int query(int l, int r, int v) {
         auto&& a = um[v];
         return upper_bound(begin(a), end(a), r) - lower_bound(begin(a), end(a), l);
+    }
+};
+```
+
+树状数组解法（时空复杂度均为$O(NlogN)$）：
+```
+struct BIT {
+    /*
+        树状数组by Mikasa Mikoto(类封装版，更安全)
+        下标从1开始
+        单点修改，区间[0, R]查询和
+    */
+    using TT = int;
+    static const int N = 1e5 + 10;
+    //改变了tr的类型，这提醒了我们维护的信息不要拘泥于基本类型（包括线段树维护的信息）
+    unordered_map<int, int> tr[N] {};
+    inline int lowbit(int x) {
+        return x & -x;
+    }
+    inline void add(int x, TT c) {
+        for(int i = x; i < N; i += lowbit(i)) tr[i][c] ++;
+    }
+    inline TT query(int x, int c) {
+        TT res = 0;
+        for(int i = x; i; i -= lowbit(i)) res += tr[i][c];
+        return res;
+    }
+};
+
+
+class RangeFreqQuery {
+public:
+    BIT a;
+    RangeFreqQuery(vector<int>& arr) {
+        for(int i = 1; i <= size(arr); i ++) {
+            a.add(i, arr[i - 1]);
+        }
+    }
+    
+    int query(int left, int right, int value) {
+        return a.query(right + 1, value) - a.query(left, value);
     }
 };
 ```
@@ -172,7 +213,7 @@ public:
 ----
 
 ## 个人总结  
-错误太多，第三题上来就想主席树，实际上不好写，没想明白，看到通过数很多才删掉重写。建议打lc周赛忘掉这玩意，考不了。另外第四题中间check传参的时候写成int，爆int后第一时间没看出来，debug花费时间，外加WA两发，建议多写auto，减少错误。
+错误太多，第三题上来就想主席树，确实可以解决，但太久没写生疏了，白写半天，看到通过数很多才删掉重写。建议打lc周赛忘掉这玩意，考不了。另外第四题中间check传参的时候写成int，爆int后第一时间没看出来，debug花费时间，外加WA两发，建议多写auto，减少错误。
 
 
 ----
