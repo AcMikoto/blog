@@ -153,6 +153,111 @@ public:
 - 空间复杂度$O(N^3)$
 ----
 
+---
+## [730. 统计不同回文子序列](https://leetcode-cn.com/problems/count-different-palindromic-subsequences/)
+
+### 思路
+显然是区间dp的问题，相比于一般的统计回文子序列问题，主要难点在于判重。在传统区间dp的状态之外，额外增加一维，将区间状态定义为f[i][j][k],代表区间[i, j]能够组成的两端为字母为k的不同的回文子序列个数。显然当k不同时，[i, j]区间组成的回文子序列互不相同，当s[i]-'a'不等于k时，当前左端点对子序列无贡献，则f[i][j][k] = f[i + 1][j][k]同理可以对右端点作相同考虑。当左右端点都等于'a' + k时，与三数之和去重的思路类似，优先考虑采用左右端点的字母，当左右端点字母都用过才去考虑用更里面一层的相同字母。具体见代码注释。  
+
+### code
+```
+const int mod = 1e9 + 7, N = 1010;
+int f[N][N][4];
+class Solution {
+public:
+    int countPalindromicSubsequences(string s) {
+        int n = s.size();
+        for(int len = 1; len <= n; len ++) {
+            for(int st = 0; st + len - 1 < n; st ++) {
+                int ed = st + len - 1;
+                for(int k = 0; k < 4; k ++) {
+                    auto&& u = f[st][ed][k];
+                    //实测在这里初始化可以避免每次都初始化一个巨大数组带来的开销，显著减少运行时间
+                    if(len == 1) u = int(s[st] == 'a' + k);
+                    else {
+                        //如果左端点不是当前元素，则两端元素为k的回文子序列不可能以它开头
+                        if(s[st] != 'a' + k) u = f[st + 1][ed][k];
+                        else if(s[ed] != 'a' + k) u = f[st][ed - 1][k];
+                        else {
+                            // u = 2是两个端点可以形成的长度为1和2的回文子序列
+                            u = 2;
+                            // 两个端点 + 中间的回文子序列组成的新的回文子序列
+                            for(int t = 0; t < 4; t ++) {
+                                u += f[st + 1][ed - 1][t];
+                                u %= mod;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        int res = 0;
+        for(int i = 0; i < 4; i ++) {
+            res += f[0][n - 1][i];
+            res %= mod;
+        }
+        return res;
+    }
+};
+```
+### 复杂度分析
+忽略常数的话两重循环$O(N^2)$，考虑常数时的最坏复杂度$O(N^2K^2)$,其中K为字符种类个数
+- 时间复杂度$O(N^2)$
+- 空间复杂度$O(N^2)$
+
+---
+
+## [1000. 合并石头的最低成本](https://leetcode-cn.com/problems/minimum-cost-to-merge-stones/)
+
+### 思路
+
+首先，每次合并K个石头，显然无解情况是可以特判的，合并一次相当于石头减少$K-1$个，若石头总量模$K-1$余1，此时必然能合并，否则不能合并成一堆，但我们发现一个特例，就是每次合并2个石头，$K-1=1$，一个常用的技巧是先将总数$n$减1，然后判断$(n - 1)\%(k - 1)$是否为0即可，至此，完成了一定数量的石头是否能合并成一堆的判断。
+
+另外，进一步地，如果我们石头合并到尽可能堆数少，那么对于一个区间$[i, j]$其合并后的最少堆数一定是确定的,因此从可以定义状态f(i, j)定义为将$[i,j]$区间合并成最少堆数时的花费。状态定义完后思考状态之间的转移：  
+
+先不考虑合并，假设[i, j]区间最终能加成x堆，不妨设它总是由合并成1堆的左边f[i, mid](mid = 1 + (k - 1) * N)和右边堆累加而来。因此有$x \in [2, k]$, （同样的通过区间划分，也能包含所有的情况）每当累计到K堆时我们最后合并一次。那么有：
+$f[i][j] = min(f[i][j], f[i][mid] + f[mid + 1][j])$
+
+具体见代码及注释   
+
+### code
+
+```
+class Solution {
+public:
+    int mergeStones(vector<int>& stones, int k) {
+        int n = stones.size();
+        //特判无解
+        if((n - 1) % (k - 1)) return -1;
+        const int N = 35;
+        int f[N][N] {}, sum[N] {};
+        //这个前缀和属于石子合并常用技巧了
+        for(int i = 0; i < n; i ++) {
+            sum[i + 1] = sum[i] + stones[i];
+        }
+        auto dfs = [&](auto&& dfs, int l, int r) {
+            //区间长度为1时初始化
+            if(l == r) return 0;
+            if(f[l][r]) return f[l][r];
+            auto&& res = f[l][r] = 0x3f3f3f3f;
+            //划分为左边一堆和右边剩余堆，当然划分为右边一堆和左边剩余堆也正确
+            for(int mid = l; mid < r; mid += k - 1) {
+                res = min(res, dfs(dfs, l, mid) + dfs(dfs, mid + 1, r));
+            }
+            //当可以合并时，合并一下
+            if((r - l) % (k - 1) == 0) res += sum[r] - sum[l - 1];
+            return res;
+        };
+        return dfs(dfs, 1, n);
+    }
+};
+```
+### 复杂度分析
+二维状态，每次转移复杂度最坏O(N)
+- 时间复杂度$O(N^3)$
+- 空间复杂度$O(N^2)$
+
+---
 
 ----
 **欢迎讨论指正**
