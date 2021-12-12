@@ -18,7 +18,15 @@ pb_ds库中有许多比较有用的数据结构，可以代替stl，不仅功能
 ```
 //万能pb_ds头文件
 #include <bits/extc++.h>
-using namespace std;
+using namespace __gnu_pbds;
+```
+注意!!!  leetcode不支持万能头文件，因此在leetcode应该这么写：
+```
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>   // 用tree
+#include<ext/pb_ds/hash_policy.hpp>   // 用hash
+#include<ext/pb_ds/priority_queue.hpp>// 用priority_queue
+using namespace __gnu_pbds;
 ```
 
 pb_ds库主要常用的数据结构有三种，分别是[Hash Table](https://gcc.gnu.org/onlinedocs/libstdc++/ext/pb_ds/hash_based_containers.html)、[Priority Queues](https://gcc.gnu.org/onlinedocs/libstdc++/ext/pb_ds/pq_design.html)以及[Tree](https://gcc.gnu.org/onlinedocs/libstdc++/ext/pb_ds/tree_based_containers.html),下面简单了解一下它们各自的特点和常见用法。  
@@ -45,7 +53,7 @@ template<
     typename Allocator = std::allocator<char> >
 class priority_queue;
 ```
-四个参数分别是存放元素类型、比较方法（默认为std::less）、tag（标识符？）可以理解为堆的类型以及分配器类型（这个通常不用管）
+四个参数分别是存放元素类型、比较方法（默认为std::less）、tag（标识符？可以理解为堆的类型）以及分配器类型（这个通常不用管）
 pb_ds库中提供5中tag：
 - pairing_heap_tag(配对堆)
 - binary_heap_tag(二叉堆)
@@ -157,6 +165,7 @@ class tree;
 - upper_bound(x) 以Cmp_Fn比较做upper_bound, 返回迭代器
 - join(x) 将x树并入当前树，前提是两棵树类型一致，x树被删除
 - split(x, b) 以Cmp_Fn比较，大于x的拆分到b树
+- clear() 清空树
 - empty() 返回是否为空
 - size() 返回大小
 
