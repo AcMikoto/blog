@@ -45,7 +45,7 @@ git是一个开源的分布式版本控制系统，可以有效、高速地处�
 
 ### 删除命令
 1. `git rm --cached xxx`：将xxx文件从仓库索引目录删掉，不希望管理该文件
-2. `git restore --staged xxx`：将xxx文件从暂存区里移除
+2. `git restore --stage xxx`：将xxx文件从暂存区里移除
 3. `git restore xxx`:将xxx文件尚未加入暂存区的修改全部撤销（暂存区没有则恢复到当前分支的HEAD所指向的版本状态）
    - `git restore`：将所有文件尚未加入暂存区的修改全部撤销
 4. `git remote rm origin`:删除现有的origin地址（然后可以重新关联一个远程仓库）
