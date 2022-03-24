@@ -501,11 +501,11 @@ int main()
 
 首先显然是l == r时没得选，输出l
 
-不相等时，可以找到一个最大的b 使得$2^b \leq r$ ，若$2^b \leq l$，那么区间同时减去一个$2^b$然后找缩小区间中1最多的数，再加上一个$2^b$就必然是当前区间[l, r]的一个解。
+不相等时，可以找到一个最大的b 使得$2^b - 1 \leq r$ 
 
-若$2^b \gt l$，那么至少有$2^b - 1$在区间内，比这个值1更多的只可能存在$2^{b+1} - 1$ 因为我们的b是最大的使得$2^b \leq r$成立的，因此$2^{b+2} - 1$必然不在区间里头，否则$2^{b + 1}$将同样小于等于r
+若$2^b - 1 \geq l$ 那么它一定是满足条件的解，因为下一个比它1多的是$2^{b + 1} - 1$,根据我们b的定义，这个数一定大于r
 
-因此这种情况我们先判断$2^{b+1} - 1$是否是解，若不是，则返回$2^b - 1$
+若$2^b - 1 \lt l$则等价于说$2^b \leq l$ 那么也有$2^b \lt r$只要将l,r同时减去$2^b$找到同时缩小区间后的f(l - $2^b$, r - $2^b$)的解，然后将其高位置1，即加上$2^b$一定就是我们要的解。
 
 ### Code
 ```
@@ -533,41 +533,17 @@ const int dir[][2] {{0,1},{1,0},{0,-1},{-1,0},{1,1},{-1,1},{1,-1},{-1,-1}};
 template <class T>inline bool chmax(T& a, const T& b){return a<b?a=b,1:0;}
 template <class T>inline bool chmin(T& a, const T& b){return a>b?a=b,1:0;}
 
-
-/*
-输入一个 l r 输出 [l, r]区间中位数为1的最多的数
-
-0 1    1
-2 3    3
-4 7    7
-8 15   15
-16 31  31
-
-如果 l == r 输出 l
-
-找一个最大的b 满足 2 ^ b <= r
-
-如果这个b满足 2 ^ b 小于等于l
-那么答案就是2 ^ b + f(l - 2 ^ b, r - 2 ^ b);
-如果2 ^ b 大于l， 那么
-如果2 ^ (b + 1) - 1在范围内，就输出这个
-否则就是2 ^ b - 1；
-*/
-
 ll f(ll l, ll r) {
     if(l == r) return l;
     int lo = 0, hi = 63;
     while(lo < hi) {
         int mid = lo + hi + 1>> 1;
-        if((1ll << mid) <= r) lo = mid;
+        if((1ll << mid) - 1 <= r) lo = mid;
         else hi = mid - 1; 
     }
-    int b = lo;
-    ll x = 1ll << b;
-    if(x <= l) return f(l - x, r - x) + x;
-    ll y = (1ll << b + 1) - 1;
-    if(y >= l && y <= r) return y;
-    return x - 1;
+    ll x = (1ll << lo) - 1;
+    if(x >= l) return x;
+    return f(l - x - 1, r - x - 1) + x + 1;
 }
 
 void solve() {
