@@ -2,10 +2,11 @@
 title: CF构造思维训练计划
 toc: true
 tags:
-  - 常用算法
+  - CodeForces
   - 构造
 categories:
-  - - 常用算法
+  - - CodeForces
+  - 构造
 date: 2022-03-22 20:44:59
 updated:
 ---
